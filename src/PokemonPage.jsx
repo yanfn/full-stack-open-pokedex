@@ -29,6 +29,8 @@ const PokemonPage = ({ previous, next }) => {
   console.log('hiddenAbility=', hiddenAbility) // eslint-disable-line no-console
   return (
     <>
+      <div>Crazy feature!</div>
+      <div>new commit</div>
       <div className="links">
         {previous && <Link to={`/pokemon/${previous.name}`}>Previous</Link>}
         <Link to="/">Home</Link>
