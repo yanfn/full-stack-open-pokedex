@@ -31,7 +31,7 @@ const PokemonPage = ({ previous, next }) => {
     <>
       <div>Crazy feature!</div>
       <div>new version</div>
-      <div>new latest feature</div>
+      <div>new latest feature check status check</div>
       <div className="links">
         {previous && <Link to={`/pokemon/${previous.name}`}>Previous</Link>}
         <Link to="/">Home</Link>
