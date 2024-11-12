@@ -84,6 +84,6 @@ jobs:
         if: success()
         with:
           severity: info
-          details: ✅ Deployment Succeeded!
+          details: ✅ Deployment Succeeded! Notify Discord
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
