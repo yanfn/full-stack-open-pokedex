@@ -1,0 +1,38 @@
+name: Periodic Health Check
+
+on:
+  schedule:
+    # 8:30 am in philippines everyday
+    - cron: '56 10 * * *'
+
+jobs:
+  health_check:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Check the deployed service URL
+        uses: jtalk/url-health-check-action@v4
+        with:
+          # Check the following URLs one by one sequentially
+          url: https://full-stack-open-pokedex-b9n3.onrender.com/
+
+          # Follow redirects, or just report success on 3xx status codes
+          follow-redirect: false # Optional, defaults to "false"
+
+          # Fail this action after this many failed attempts
+          max-attempts: 3 # Optional, defaults to 1
+
+          # Delay between retries
+          retry-delay: 5s # Optional, only applicable to max-attempts > 1
+
+          # Retry all errors, including 404. This option might trigger curl upgrade.
+          retry-all: false # Optional, defaults to "false"
+
+
+      - name: Notify Discord Healthcheck report
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        if: success()
+        with:
+          severity: info
+          details: ✅ Healthcheck Pass
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
